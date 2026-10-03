@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101225">
+  <meta name="description" content="تحدّي العقل - لعبة ألغاز وذكاء عربية">
+  <title>تحدّي العقل | Brain Challenge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div class="background-glow glow-one"></div>
+  <div class="background-glow glow-two"></div>
+
+  <header class="topbar">
+    <a href="#" class="brand" id="brandHome" aria-label="العودة للرئيسية">
+      <span class="brand-icon">🧠</span>
+      <span>تحدّي <b>العقل</b></span>
+    </a>
+    <div class="topbar-right">
+      <div class="points-pill">⭐ <span id="headerPoints">0</span> نقطة</div>
+      <button class="icon-button" id="soundButton" aria-label="تفعيل أو تعطيل المؤثرات الصوتية"
+        title="الصوت">🔊</button>
+    </div>
+  </header>
+
+  <main class="app-container">
+    <!-- الصفحة الرئيسية -->
+    <section class="screen active" id="homeScreen">
+      <div class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow"><span class="live-dot"></span> اختبر ذكاءك اليوم</span>
+          <h1>عقلك يستحق<br><span class="gradient-text">تحديًا جديدًا!</span></h1>
+          <p class="hero-description">
+            فكّر، حلّ الألغاز، اجمع النقاط وافتح مراحل جديدة.
+            هل أنت مستعد لتحدّي العقل؟
+          </p>
+          <button class="primary-button hero-button" id="startButton">
+            <span>ابدأ التحدّي</span><span class="button-arrow">←</span>
+          </button>
+          <div class="hero-note"><span>✓</span> تقدمك محفوظ تلقائيًا على جهازك</div>
+        </div>
+
+        <div class="brain-art" aria-hidden="true">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="brain-circle">
+            <span class="brain-emoji">🧠</span>
+            <span class="spark spark-one">✦</span>
+            <span class="spark spark-two">✧</span>
+            <span class="spark spark-three">✦</span>
+          </div>
+          <div class="floating-card floating-card-top">⚡ تحدٍّ ذهني</div>
+          <div class="floating-card floating-card-bottom">🏆 اجمع الإنجازات</div>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-icon purple">🎯</div>
+          <div><span class="stat-label">المراحل المفتوحة</span><strong id="unlockedStat">1</strong></div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon blue">🏆</div>
+          <div><span class="stat-label">المراحل المكتملة</span><strong id="completedStat">0</strong></div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon gold">⭐</div>
+          <div><span class="stat-label">إجمالي النقاط</span><strong id="pointsStat">0</strong></div>
+        </article>
+      </div>
+
+      <section class="levels-section">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">رحلتك نحو الذكاء</span>
+            <h2>خريطة المراحل</h2>
+          </div>
+          <span class="levels-count" id="levelsCount">0 / 15</span>
+        </div>
+        <div class="overall-progress">
+          <div class="progress-track">
+            <div class="progress-fill" id="overallProgress"></div>
+          </div>
+        </div>
+        <div class="levels-grid" id="levelsGrid"></div>
+      </section>
+
+      <div class="home-footer">
+        <span>🧩 فكّر خارج الصندوق</span>
+        <span>صُممت لتنمية مهارات التفكير</span>
+      </div>
+    </section>
+
+    <!-- شاشة اللعب -->
+    <section class="screen" id="gameScreen">
+      <div class="game-toolbar">
+        <button class="back-button" id="backButton">→ <span>الرئيسية</span></button>
+        <div class="level-badge">المرحلة <span id="levelNumber">1</span> من 15</div>
+        <div class="game-score">⭐ <strong id="gamePoints">0</strong></div>
+      </div>
+
+      <div class="game-progress">
+        <div class="progress-track">
+          <div class="progress-fill" id="levelProgress"></div>
+        </div>
+      </div>
+
+      <article class="question-card">
+        <div class="question-top">
+          <span class="category-badge" id="questionCategory">🧩 ألغاز منطقية</span>
+          <span class="question-number" id="questionNumber">السؤال 01</span>
+        </div>
+
+        <div class="question-illustration" id="questionIllustration">🔍</div>
+        <h1 class="question-title" id="questionTitle">استعد للتحدّي!</h1>
+        <p class="question-description" id="questionDescription">اقرأ السؤال جيدًا واختر الإجابة الصحيحة.</p>
+
+        <div class="answers-grid" id="answersGrid"></div>
+
+        <div class="hint-area">
+          <button class="hint-button" id="hintButton">💡 تلميح <span id="hintCost">− 2 نقطة</span></button>
+          <p class="hint-text" id="hintText" hidden></p>
+        </div>
+
+        <div class="feedback-message" id="feedbackMessage" role="status" aria-live="polite" hidden></div>
+        <button class="primary-button next-button" id="nextButton" hidden>
+          <span id="nextButtonText">المرحلة التالية</span><span>←</span>
+        </button>
+      </article>
+
+      <p class="game-tip">💜 خذ وقتك في التفكير، فكل لغز له حل!</p>
+    </section>
+
+    <!-- شاشة نهاية اللعبة -->
+    <section class="screen" id="finishScreen">
+      <div class="finish-card">
+        <div class="finish-icon" id="finishIcon">🏆</div>
+        <span class="eyebrow">أحسنت! وصلت إلى نهاية الرحلة</span>
+        <h1 id="finishTitle">إنجاز رائع!</h1>
+        <p id="finishDescription">لقد أكملت جميع المراحل المتاحة.</p>
+        <div class="finish-stats">
+          <div><span>⭐</span><strong id="finalPoints">0</strong><small>نقطة</small></div>
+          <div><span>🏆</span><strong id="finalCompleted">0</strong><small>مرحلة مكتملة</small></div>
+        </div>
+        <button class="primary-button" id="replayButton">العودة إلى المراحل <span>←</span></button>
+        <button class="secondary-button" id="retryButton">إعادة هذه المرحلة</button>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <span>تحدّي العقل © 2026</span>
+      <span>صُنع بشغف 💜</span>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+
+</html>
